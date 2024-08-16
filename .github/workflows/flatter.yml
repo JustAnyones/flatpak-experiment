@@ -47,6 +47,10 @@ jobs:
         run: |
           echo "flatpak.svetikas.lt" > CNAME
 
+      - name: Install SDK extensions
+        run: |
+          flatpak install org.freedesktop.Sdk.Extension.openjdk8 -y
+
       - name: Build
         uses: andyholmes/flatter@main
         with:
