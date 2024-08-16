@@ -11,7 +11,7 @@ jobs:
     name: Flatter
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/andyholmes/flatter/gnome:46
+      image: ghcr.io/andyholmes/flatter/freedesktop:23.08
       options: --privileged
 
     strategy:
@@ -45,7 +45,7 @@ jobs:
       # Generate a CNAME file on-the-fly for a configured host
       - name: Generate CNAME
         run: |
-          echo "flatter.andyholmes.ca" > CNAME
+          echo "flatpak.svetikas.lt" > CNAME
 
       - name: Build
         uses: andyholmes/flatter@main
