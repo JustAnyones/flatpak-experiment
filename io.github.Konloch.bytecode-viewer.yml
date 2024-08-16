@@ -28,11 +28,11 @@ modules:
       no-debuginfo: true
     buildsystem: simple
     build-commands:
-
-      - install -d /app/bin
-      - install -Dpm744 run.sh /app/bin/run.sh
-      - install -Dpm644 bytecodeviewer.jar /app/bin/bytecodeviewer.jar
-      - install -Dm644 io.github.Konloch.bytecode-viewer.desktop /app/share/applications/io.github.Konloch.bytecode-viewer.desktop
+      - install -d "$FLATPAK_DEST/bin"
+      - install -Dpm744 run.sh "$FLATPAK_DEST/bin/run.sh"
+      - install -Dpm644 bytecodeviewer.jar "$FLATPAK_DEST/bin/bytecodeviewer.jar"
+      - install -Dm644  bytecode-viewer.desktop "$FLATPAK_DEST/share/applications/$FLATPAK_ID.desktop"
+      - install -Dm644  icon.png "$FLATPAK_DEST/share/icons/hicolor/32x32/apps/$FLATPAK_ID.png"
 
       - tar -xf dbeaver.tar.gz --one-top-level=dbeaver_unpack
       - rm -rf dbeaver.tar.gz
@@ -48,7 +48,7 @@ modules:
         path: run.sh
 
       - type: file
-        path: io.github.Konloch.bytecode-viewer.desktop
+        path: bytecode-viewer.desktop
 
       - type: file
         url: https://raw.githubusercontent.com/dbeaver/dbeaver/devel/product/community/icons-sources/icon_16x16.png
