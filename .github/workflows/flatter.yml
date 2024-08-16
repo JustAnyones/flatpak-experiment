@@ -38,7 +38,8 @@ jobs:
       - name: Generate CNAME
         run: |
           echo "flatpak.svetikas.lt" > CNAME
-
+      
+      # Install the SDK extensions
       - name: Install SDK extensions
         run: |
           flatpak install runtime/org.freedesktop.Sdk.Extension.openjdk8/x86_64/23.08 -y
@@ -48,7 +49,6 @@ jobs:
         with:
           files: |
             io.github.Konloch.bytecode-viewer.yml
-          # build-aux/flatpak/com.example.App.json
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
@@ -71,6 +71,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v4
       - name: GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3
+        uses: actions/deploy-pages@v4
