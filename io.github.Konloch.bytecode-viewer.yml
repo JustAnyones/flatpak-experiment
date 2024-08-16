@@ -29,7 +29,7 @@ modules:
     buildsystem: simple
     build-commands:
       - mkdir -p "pypy27"
-      - tar -xjf pypy27.tar.bz2 -C pypy27
+      - tar -xjf pypy27.tar.bz2 -C pypy27 --no-same-owner
       - cp -rv pypy27/*/ "$FLATPAK_DEST/pypy2.7"
       - rm -r pypy27 pypy27.tar.bz2
 
