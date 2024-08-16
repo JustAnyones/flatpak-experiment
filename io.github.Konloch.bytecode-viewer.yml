@@ -23,12 +23,33 @@ modules:
     build-commands:
       - /usr/lib/sdk/openjdk8/install.sh
 
+  - name: pypy2.7
+    build-options:
+      no-debuginfo: true
+    buildsystem: simple
+    build-commands:
+      - mkdir -p "pypy27"
+      - tar -xjf pypy27.tar.bz2 -C pypy27
+      - cp -rv pypy27/*/ "$FLATPAK_DEST/pypy2.7"
+      - rm -r pypy27 pypy27.tar.bz2
+
+    sources:
+      - type: file
+        only-arches:
+          - x86_64
+        dest-filename: pypy27.tar.bz2
+        # Unrecognized content encoding type. libcurl understands deflate, gzip, br, zstd content encodings.
+        #url: https://downloads.python.org/pypy/pypy2.7-v7.3.16-linux64.tar.bz2
+        path: pypy2.7-v7.3.16-linux64.tar.bz2
+        sha256: 04b2fceb712d6f811274825b8a471ee392d3d1b53afc83eb3f42439ce00d8e07
+
   - name: application
     build-options:
       no-debuginfo: true
     buildsystem: simple
     build-commands:
       - install -d "$FLATPAK_DEST/bin"
+      - install -Dm664  settings.bcv "$FLATPAK_DEST/settings.bcv"
       - install -Dpm744 run.sh "$FLATPAK_DEST/bin/run.sh"
       - install -Dpm644 bytecodeviewer.jar "$FLATPAK_DEST/bin/bytecodeviewer.jar"
       - install -Dm644  bytecode-viewer.desktop "$FLATPAK_DEST/share/applications/$FLATPAK_ID.desktop"
@@ -40,6 +61,9 @@ modules:
 
       - type: file
         path: bytecode-viewer.desktop
+
+      - type: file
+        path: settings.bcv
 
       #- type: file
       #  path: io.dbeaver.DBeaverCommunity.appdata.xml
