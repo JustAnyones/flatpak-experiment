@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=ILSpy
+Comment=.NET assembly browser and decompiler
+Exec=ILSpy
+Icon=io.github.icsharpcode.AvaloniaILSpy
+Terminal=false
+Type=Application
+Categories=Development;
+Keywords=decompile;decompiler;csharp;

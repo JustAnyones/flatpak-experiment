@@ -1,0 +1,48 @@
+app-id: io.github.icsharpcode.AvaloniaILSpy
+
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+
+sdk: org.freedesktop.Sdk
+
+command: ILSpy
+finish-args:
+  #- --share=ipc
+  - --socket=x11
+  #- --device=all
+  - --share=network
+  - --filesystem=home
+
+modules:
+  - name: application
+    build-options:
+      no-debuginfo: true
+    buildsystem: simple
+    build-commands:
+      # unzipping
+      - unzip Linux.x64.zip -d x64
+      - unzip x64/ILSpy-linux-x64-Release.zip -d x64
+      - mkdir -p "ilspy"
+      - mv x64/artifacts/linux-x64/* ilspy/
+      - rm -r x64 Linux.x64.zip
+      # create the bin directort
+      - install -d "$FLATPAK_DEST/bin"
+      # copy all files over to bin, might need a better dir
+      - cp -r ilspy/* "$FLATPAK_DEST/bin"
+      # chmod the executable
+      - install -Dm744 ilspy/ILSpy "$FLATPAK_DEST/bin/ILSpy"
+
+      # include extras such as icon and desktop file
+      - install -Dm644 AvaloniaILSpy.desktop "$FLATPAK_DEST/share/applications/$FLATPAK_ID.desktop"
+      - install -Dm644 ilspy/Images/ILSpy.png "$FLATPAK_DEST/share/icons/hicolor/48x48/apps/$FLATPAK_ID.png"
+
+    sources:
+      - type: file
+        path: AvaloniaILSpy.desktop
+
+      - type: file
+        only-arches:
+          - x86_64
+        dest-filename: Linux.x64.zip
+        url: https://github.com/icsharpcode/AvaloniaILSpy/releases/download/v7.2-rc/Linux.x64.Release.zip
+        sha256: ad202f6b3b14c05f81bf998c8d0bccd38e718e759dc3e89a0d813503bca0bd08
