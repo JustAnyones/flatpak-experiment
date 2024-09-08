@@ -2,8 +2,8 @@ name: Flatter
 
 on:
   # Rebuild once a day
-  schedule:
-    - cron: "0 0 1/7 * *"
+  #schedule:
+  #  - cron: "0 0 1/7 * *"
   workflow_dispatch:
 
 jobs:
@@ -48,7 +48,7 @@ jobs:
         uses: andyholmes/flatter@main
         with:
           files: |
-            io.github.Konloch.bytecode-viewer.yml
+            io.github.Konloch.bytecode-viewer/io.github.Konloch.bytecode-viewer.yml
             io.github.icsharpcode.AvaloniaILSpy/io.github.icsharpcode.AvaloniaILSpy.yml
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
