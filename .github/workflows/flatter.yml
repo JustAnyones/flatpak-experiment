@@ -11,7 +11,7 @@ jobs:
     name: Flatter
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/andyholmes/flatter/freedesktop:23.08
+      image: ghcr.io/andyholmes/flatter/freedesktop:24.08
       options: --privileged
 
     strategy:
@@ -42,7 +42,7 @@ jobs:
       # Install the SDK extensions
       - name: Install SDK extensions
         run: |
-          flatpak install runtime/org.freedesktop.Sdk.Extension.openjdk8/x86_64/23.08 -y
+          flatpak install runtime/org.freedesktop.Sdk.Extension.openjdk8/x86_64/24.08 -y
 
       - name: Build
         uses: andyholmes/flatter@main

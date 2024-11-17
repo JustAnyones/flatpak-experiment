@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 # Based on the AUR package
 opts=(
   -Dswing.crossplatformlaf='com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
   -Dawt.useSystemAAFontSettings='on'
   -Dswing.aatext='true'
-  -Duser.home=$XDG_DATA_HOME # ugly hack for BCV 2.12 to save in flatpak data dir
+  -Duser.home="$XDG_DATA_HOME" # ugly hack for BCV 2.12 to save in flatpak data dir
 )
 
 # Install default settings file with the binary paths set
